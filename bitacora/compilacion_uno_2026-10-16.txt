@@ -1,0 +1,14 @@
+Compilación para Arduino Uno (arduino-cli, core arduino:avr 1.8.8), 16 oct 2026
+Esquemático del 15 oct: los dos Arduino se hablan por serial en vez de I2C, y los LEDs están en U4.
+
+== ANTES (código del 9 oct)
+robot/:   20416 bytes (63%) de programa, 1597 bytes (77%) de RAM
+motores/: 3898 bytes (12%) de programa, 382 bytes (18%) de RAM
+
+== DESPUÉS: robot/ (Arduino U2, sensores y lógica)
+Sketch uses 20192 bytes (62%) of program storage space. Maximum is 32256 bytes.
+Global variables use 1577 bytes (77%) of dynamic memory, leaving 471 bytes for local variables. Maximum is 2048 bytes.
+
+== DESPUÉS: motores/ (Arduino U4, L298N y LEDs)
+Sketch uses 2820 bytes (8%) of program storage space. Maximum is 32256 bytes.
+Global variables use 230 bytes (11%) of dynamic memory, leaving 1818 bytes for local variables. Maximum is 2048 bytes.

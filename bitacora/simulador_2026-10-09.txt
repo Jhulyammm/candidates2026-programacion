@@ -1,0 +1,199 @@
+Simulador de Candidates 2026 (borrador). Velocidad supuesta: 15 cm/s
+
+===============================================================================
+ PISTA A: laberinto de la imagen 1.1
+===============================================================================
+  Velocidad supuesta 15 cm/s y 0.9 s por giro. Arranca en el verde viendo
+  hacia arriba, con la memoria vacía.
+
+   0:01  Pista A: exploro todo el laberinto y dejo el rojo para el final
+   0:06  Color nuevo: rosa en (2, 0), lo muestro con el LED
+   0:09  Callejón en (3, 0): regreso por donde vine
+   0:40  Me asomé al rojo en (4, 0): lo anoto y lo dejo para el final
+   0:40  Callejón en (4, 1): regreso por donde vine
+   0:59  Callejón en (3, 1): regreso por donde vine
+   1:14  Color nuevo: naranja en (0, 4), lo muestro con el LED
+   1:14  Callejón en (0, 4): regreso por donde vine
+   1:20  Color nuevo: amarillo en (1, 3), lo muestro con el LED
+   1:27  Color nuevo: cian en (0, 2), lo muestro con el LED
+   1:30  Callejón en (0, 1): regreso por donde vine
+   1:56  Ya no queda nada por explorar (24 casillas vistas)
+   1:56  Voy a (4, 0) por la ruta más corta (BFS): 10 casillas
+   2:23  Llegué al rojo
+   2:23  Bonus 1: el regreso es de 50 casillas; llevo 143 s y quedan 216 s
+   4:32  De regreso en la salida
+
+  Puntos (reglamento 4.1)
+     20  colores mostrados con el LED: 4 de 4
+     20  topes: 4 de 4
+     45  escaleras: 3 de 3
+     20  rampa: la cruzó
+     25  checkpoint final: llegó a los 2:22
+     35  bonus 1, regresar por el mismo camino: sí
+      0  bonus 2, ArUco: pendiente
+    165  de 195 posibles. Tiempo usado: 4:32
+
+  La pista (el robot no la conoce)       En qué orden pisó cada casilla
+  +---+---+---+---+---+                  +---+---+---+---+---+
+  | N           E     |                  | 18  17   8   9  10|
+  +---+   +   +   +   +                  +---+   +   +   +   +
+  |   : A   E     |   |                  | 20: 19   7  14| 11|
+  +   +---+   +   +   +                  +   +---+   +   +   +
+  | C |       |   | M |                  | 21| 23   6| 15| 12|
+  + = +   + = +   +   +                  + = +   + = +   +   +
+  |   |       |   | M |                  | 22| 24   5| 16| 13|
+  +   +   +   +---+   +                  +   +   +   +---+   +
+  | V   E   P :   | R |                  |  1   2   3:  4| 25|
+  +---+---+---+---+---+                  +---+---+---+---+---+
+
+  Mapa que aprendió solo: 96 de 96 lados bien (paredes y huecos de las casillas que pisó)
+
+===============================================================================
+ PISTA A: laberinto inventado (otra salida, otro final)
+===============================================================================
+  Velocidad supuesta 15 cm/s y 0.9 s por giro. Arranca en el verde viendo
+  hacia arriba, con la memoria vacía.
+
+   0:01  Pista A: exploro todo el laberinto y dejo el rojo para el final
+   0:12  Color nuevo: rosa en (2, -2), lo muestro con el LED
+   0:22  Callejón en (0, -1): regreso por donde vine
+   0:44  Color nuevo: cian en (4, 1), lo muestro con el LED
+   0:47  Callejón en (4, 2): regreso por donde vine
+   0:59  Color nuevo: amarillo en (2, 2), lo muestro con el LED
+   1:03  Callejón en (3, 2): regreso por donde vine
+   1:11  Me asomé al rojo en (0, 2): lo anoto y lo dejo para el final
+   1:11  Callejón en (1, 2): regreso por donde vine
+   1:28  Callejón en (3, -2): regreso por donde vine
+   1:58  Color nuevo: naranja en (1, -1), lo muestro con el LED
+   1:58  Callejón en (1, -1): regreso por donde vine
+   2:14  Ya no queda nada por explorar (24 casillas vistas)
+   2:14  Voy a (0, 2) por la ruta más corta (BFS): 1 casillas
+   2:17  Llegué al rojo
+   2:17  Bonus 1: el regreso es de 46 casillas; llevo 137 s y quedan 222 s
+   4:19  De regreso en la salida
+
+  Puntos (reglamento 4.1)
+     20  colores mostrados con el LED: 4 de 4
+     10  topes: 2 de 4
+     30  escaleras: 2 de 3
+     20  rampa: la cruzó
+     25  checkpoint final: llegó a los 2:16
+     35  bonus 1, regresar por el mismo camino: sí
+      0  bonus 2, ArUco: pendiente
+    140  de 195 posibles. Tiempo usado: 4:19
+
+  La pista (el robot no la conoce)       En qué orden pisó cada casilla
+  +---+---+---+---+---+                  +---+---+---+---+---+
+  | R       A     |   |                  | 25  19  17  18| 14|
+  +   +---+   +   +   +                  +   +---+   +   +   +
+  |       | E     : C |                  | 24  23| 16  15: 13|
+  + = +   +---+   +   +                  + = +   +---+   +   +
+  | V         | M |   |                  |  1   2   3| 20| 12|
+  +   +   +   +   + = +                  +   +   +   +   + = +
+  |   | N     | M |   |                  |  8| 22   4| 21| 11|
+  +   +---+   +   +   +                  +   +---+   +   +   +
+  |         P       E |                  |  7   6   5   9  10|
+  +---+---+---+---+---+                  +---+---+---+---+---+
+
+  Mapa que aprendió solo: 96 de 96 lados bien (paredes y huecos de las casillas que pisó)
+
+===============================================================================
+ PISTA B: la pista de la imagen 2.1, de principio a fin
+===============================================================================
+  Pelota con el lado abierto hacia abajo, como en la imagen 2.1. Arranca en
+  el inicio viendo hacia arriba, con la memoria vacía.
+
+   0:00  Empiezo en la sección 1
+   0:01  Sección 1: busco la pelota con el mismo DFS del laberinto
+   0:27  Veo la pelota enfrente: la tomo y la saco de su casilla
+   0:31  Tengo la pelota
+   0:31  Callejón en (1, 1): regreso por donde vine
+   0:41  Checkpoint 1
+   0:41  Sección 2: cruzo sin pisar las líneas blancas
+   0:44  Línea a 29 cm (la ve: el derecho): busco el hueco hacia la izquierda
+   0:57  Línea a 59 cm (la ve: los dos sensores): busco el hueco hacia la derecha
+   1:20  Línea a 89 cm (la ve: el derecho): busco el hueco hacia la izquierda
+   1:37  Checkpoint 2
+   1:37  Sección 3: sigo los colores
+   1:40  Paso 1: naranja. Rumbo 0 (arriba) -> 0 (arriba). (0 - 0 + 4) mod 4 = 0: recto
+   1:42  Paso 2: amarillo. Rumbo 0 (arriba) -> 3 (izquierda). (3 - 0 + 4) mod 4 = 3: izquierda
+   1:45  Paso 3: naranja. Rumbo 3 (izquierda) -> 0 (arriba). (0 - 3 + 4) mod 4 = 1: derecha
+   1:49  Paso 4: amarillo. Rumbo 0 (arriba) -> 3 (izquierda). (3 - 0 + 4) mod 4 = 3: izquierda
+   1:52  Llegué al fin
+
+  Puntos (reglamento 4.2)
+     15  sacó la pelota de su casilla (a los 0:29)
+     70  checkpoint 1 con pelota (a los 0:40)
+     70  checkpoint 2 con pelota (a los 1:36)
+     85  fin con pelota (a los 1:51)
+    240  de 240 posibles. Tiempo usado: 1:52
+
+===============================================================================
+ PISTA B: sección 1 con las cuatro posiciones de las paredes (imagen 2.2)
+===============================================================================
+  Misma pista; solo cambia hacia dónde queda abierta la casilla de la pelota.
+
+  Abierta hacia arriba:       pelota a los 0:44, checkpoint 1 a los 0:54, fin a los 2:05: 240 puntos
+  Abierta hacia la derecha:   pelota a los 0:38, checkpoint 1 a los 0:41, fin a los 1:54: 240 puntos
+  Abierta hacia abajo:        pelota a los 0:29, checkpoint 1 a los 0:40, fin a los 1:51: 240 puntos
+  Abierta hacia la izquierda: pelota a los 0:49, checkpoint 1 a los 1:05, fin a los 2:16: 240 puntos
+
+===============================================================================
+ PISTA B: reinicio en el checkpoint 1, con las líneas de la imagen 2.4
+===============================================================================
+  Lack of progress en la sección 2: el capitán reinicia el robot en el checkpoint
+  1 con la pelota enfrente (imagen 3.1). El robot tiene que darse cuenta solo de
+  que va en la sección 2.
+
+   0:00  Arranco en un checkpoint: tomo la pelota que me pusieron enfrente
+   0:03  Empiezo en la sección 2
+   0:03  Sección 2: cruzo sin pisar las líneas blancas
+   0:06  Línea a 29 cm (la ve: el derecho): busco el hueco hacia la izquierda
+   0:15  Línea a 59 cm (la ve: el izquierdo): busco el hueco hacia la derecha
+   0:35  Línea a 89 cm (la ve: los dos sensores): busco el hueco hacia la izquierda
+   1:03  Checkpoint 2
+   1:03  Sección 3: sigo los colores
+   1:06  Paso 1: naranja. Rumbo 0 (arriba) -> 0 (arriba). (0 - 0 + 4) mod 4 = 0: recto
+   1:08  Paso 2: amarillo. Rumbo 0 (arriba) -> 3 (izquierda). (3 - 0 + 4) mod 4 = 3: izquierda
+   1:12  Paso 3: naranja. Rumbo 3 (izquierda) -> 0 (arriba). (0 - 3 + 4) mod 4 = 1: derecha
+   1:15  Paso 4: amarillo. Rumbo 0 (arriba) -> 3 (izquierda). (3 - 0 + 4) mod 4 = 3: izquierda
+   1:18  Llegué al fin
+
+  Puntos desde el reinicio
+     70  checkpoint 2 con pelota (a los 1:02)
+     85  fin con pelota (a los 1:17)
+    155  Tiempo usado: 1:18
+
+===============================================================================
+ PISTA B: reinicio en el checkpoint 2, con la sección 3 de la imagen 2.7
+===============================================================================
+  El ejemplo del reglamento: la ruta es arriba, arriba, derecha, abajo, derecha.
+  Es la misma prueba de escritorio de la propuesta del 19 sep.
+
+   0:00  Arranco en un checkpoint: tomo la pelota que me pusieron enfrente
+   0:03  Empiezo en la sección 3
+   0:03  Sección 3: sigo los colores
+   0:05  Paso 1: naranja. Rumbo 0 (arriba) -> 0 (arriba). (0 - 0 + 4) mod 4 = 0: recto
+   0:08  Paso 2: naranja. Rumbo 0 (arriba) -> 0 (arriba). (0 - 0 + 4) mod 4 = 0: recto
+   0:10  Paso 3: cian. Rumbo 0 (arriba) -> 1 (derecha). (1 - 0 + 4) mod 4 = 1: derecha
+   0:13  Paso 4: rosa. Rumbo 1 (derecha) -> 2 (abajo). (2 - 1 + 4) mod 4 = 1: derecha
+   0:17  Paso 5: cian. Rumbo 2 (abajo) -> 1 (derecha). (1 - 2 + 4) mod 4 = 3: izquierda
+   0:20  Llegué al fin
+
+  Puntos desde el reinicio
+     85  fin con pelota (a los 0:19)
+     85  Tiempo usado: 0:20
+
+===============================================================================
+ RESUMEN
+===============================================================================
+  Pista A: laberinto de la imagen 1.1                       4:32  165 de 195  con bonus 1
+  Pista A: laberinto inventado (otra salida, otro final)    4:19  140 de 195  con bonus 1
+  Pista B: imagen 2.1 completa                              1:52  240 de 240  
+  Pista B: pelota abierta hacia arriba                      2:06  240 de 240  
+  Pista B: pelota abierta hacia la derecha                  1:55  240 de 240  
+  Pista B: pelota abierta hacia abajo                       1:52  240 de 240  
+  Pista B: pelota abierta hacia la izquierda                2:17  240 de 240  
+  Pista B: reinicio en checkpoint 1, líneas de la 2.4       1:18  155 de 155  
+  Pista B: reinicio en checkpoint 2, sección 3 de la 2.7    0:20   85 de  85  
+

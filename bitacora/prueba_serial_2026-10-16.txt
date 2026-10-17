@@ -1,0 +1,19 @@
+Prueba del serial entre los dos Arduino (simulador/prueba_motores.cpp), 16 oct 2026
+
+OK     ninguna velocidad de -300 a 300 se manda como 255
+OK     la velocidad que llega difiere a lo mucho en 1 de la que se mandó
+OK     texto ignorado y 'M' 160 -160 llega igual
+OK     texto después de la orden no cambia las velocidades
+OK     el texto no se escribe en datos[] (no se sale del arreglo)
+OK     orden cortada se descarta y la siguiente llega bien
+OK     orden desconocida no cambia nada
+OK     'L' 3 prende el naranja (255, 50, 0)
+OK     'L' con un color fuera de la tabla no cambia los LEDs
+OK     '?' contesta 255 '!'
+OK     'F' frena y deja los motores en 0
+OK     antes del silencio va a 120
+OK     a los 250 ms sin órdenes sigue andando
+OK     a los 350 ms sin órdenes se apaga
+OK     un 'L' no mantiene vivos los motores
+
+0 fallas
