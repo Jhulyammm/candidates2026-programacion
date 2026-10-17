@@ -71,7 +71,7 @@ const int AJUSTE_DER = 0;           // si sin paredes se va chueco: + acelera la
 const int FRENTE_CONFIABLE = 70;    // más lejos, el eco puede rebotar en las paredes de los lados
 const int PARED_GUIA = 12;          // una pared de lado a menos de esto sirve para ir derecho
 const int KP_PARED = 8;             // corrección por cada cm que se acerca o se aleja de ella
-const int GARRA_ABIERTA = 90, GARRA_CERRADA = 20;   // grados del servo de la compuerta: medirlos al
+const int GARRA_ABIERTA = 50, GARRA_CERRADA = 0;   // grados del servo de la compuerta: medirlos al
                                                     // armarla (paso 10 del instructivo). En el
                                                     // modelo 3D abre 45 grados
 const int LINEA_ES_BLANCO = LOW;    // el TCRT5000 manda LOW cuando ve blanco
