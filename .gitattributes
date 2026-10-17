@@ -1,0 +1,6 @@
+# Los PDF y las imágenes son binarios: git no debe cambiarles los saltos de
+# línea. Sin esto, en Windows git trata algunos PDF como texto y al descargarlos
+# salen dañados.
+*.pdf binary
+*.png binary
+*.zip binary

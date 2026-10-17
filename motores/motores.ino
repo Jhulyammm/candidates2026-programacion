@@ -20,10 +20,10 @@
 //
 // Lo que llega entre una orden y la siguiente es texto, y se ignora.
 //
-// Por qué texto y no bytes sueltos: la primera versión empezaba cada orden con el
-// byte 255, y en la prueba del 16 oct el monitor serial del Arduino IDE se comía
-// las letras que venían después de ese byte (y del 0): no se podían leer los
-// mensajes de la calibración. Con texto, el monitor muestra la orden tal cual.
+// Por qué texto y no bytes sueltos: así las órdenes se pueden leer en el monitor
+// serial. La primera versión empezaba cada orden con el byte 255; en la prueba
+// del 16 oct salían letras revueltas y se sospechó de ese byte, pero siguieron
+// saliendo con texto, así que la causa era otra (ver la bitácora).
 //
 // Si el otro Arduino deja de mandar órdenes (se reinició, se trabó, se zafó un
 // cable), a los 300 ms se apagan los motores. Así el robot nunca se queda

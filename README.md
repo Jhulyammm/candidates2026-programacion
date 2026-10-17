@@ -1,5 +1,7 @@
 # Código de Candidates 2026 (borrador)
 
+Repositorio: https://github.com/Jhulyammm/candidates2026-programacion. La bitácora de programación está en `BITACORA.md`.
+
 La propuesta de programación del 19 de septiembre, ya en código y adaptada al esquemático de electrónica del 15 oct (`candidates schematic.pdf`) y a su versión final del 16 oct (`Candidates_esquematicofinal.pdf`), que tiene las mismas conexiones. El robot lleva **dos Arduino Uno** unidos por serial, así que son tres partes:
 
 - `robot/`: el programa del Arduino de los **sensores** (U2 en el esquemático). Tiene toda la lógica.
@@ -247,7 +249,7 @@ Se hablan por serial, con un cable de ida y uno de vuelta. El serial de un Uno e
 
 Cada velocidad va en un solo byte: la mitad de la velocidad, más 127 para que no haya negativos. Queda de 00 a FE (7F es parado). Se pierde la mitad de la precisión, porque va de 2 en 2, y el motor no lo nota. Lo que llegue entre una orden y la siguiente es texto, y U4 lo ignora. Si una orden llega cortada o con una letra que no es hexadecimal, se tira, y el siguiente `~` vuelve a empezar. Todo esto lo comprueba `simulador/prueba_motores.cpp`.
 
-La primera versión (16 oct) empezaba cada orden con el byte 255 y mandaba los números como bytes sueltos. Al probarla en el robot, el monitor serial del Arduino IDE se comía las letras que venían después del 255 y del 0, y no se podían leer los mensajes de la calibración. Por eso ahora todo va como texto.
+La primera versión (16 oct) empezaba cada orden con el byte 255 y mandaba los números como bytes sueltos. Al probarla en el robot salían letras revueltas en el monitor serial, y se sospechó de esos bytes. Con las órdenes en texto las letras revueltas siguieron saliendo mientras el cable entre los Arduino estaba puesto, así que esa no era la causa; leyendo el puerto directo, los bytes llegaban limpios. El formato de texto se quedó porque así las órdenes se pueden leer en el monitor.
 
 Si U4 pasa 300 ms sin recibir órdenes de motor, apaga los motores. Así, si U2 se reinicia o se zafa un cable, el robot se para en vez de seguir avanzando contra una pared.
 

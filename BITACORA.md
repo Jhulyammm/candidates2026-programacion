@@ -2,9 +2,10 @@
 
 RoBorregos Candidates 2026, categoría Principiantes.
 
-- **Programación:** Jhulyam [confirmar: nombre completo y matrícula]
+- **Programación:** Ahmed Jhulyam Corpus Venegas (A00845480)
 - **Equipo:** [confirmar: nombre del equipo, capitán, quién lleva electrónica y quién mecánica]
 - **Asesores:** [confirmar: nombres]
+- **Repositorio:** https://github.com/Jhulyammm/candidates2026-programacion
 
 > **Antes de entregar, borrar este recuadro.** Las entradas del 19 sep, 26 sep, 9 oct y 16 oct tienen archivos que las respaldan (están en `bitacora/`). Lo marcado con [confirmar] lo reconstruí sin evidencia escrita: corrígelo con lo que de verdad pasó o bórralo. El reglamento pide que podamos explicar y justificar la bitácora en las sesiones de seguimiento, y los asesores estuvieron ahí.
 
@@ -20,7 +21,7 @@ Una entrada por semana, desde la primera sesión con asesores. Cada una dice qu�
 | 21 al 27 sep | Primer código, y un simulador que lo prueba sin robot. | `robot/`, `simulador/`, `README.md` |
 | 28 sep al 4 oct | Llega el esquemático v1.0 de electrónica. | `bitacora/esquematico_v1.png` |
 | 5 al 11 oct | Adapté el código a los dos Arduino del esquemático. | `bitacora/*_2026-10-09.*` |
-| 12 al 18 oct | Electrónica cambió el esquemático: los Arduino se hablan por serial y hay LEDs. | `bitacora/*_2026-10-16.*`, `bitacora/esquematico_*.png` |
+| 12 al 18 oct | Electrónica cambió el esquemático: los Arduino se hablan por serial y hay LEDs. Primera prueba en el robot y el código en GitHub. | `bitacora/*_2026-10-16.*`, `bitacora/esquematico_*.png`, el repositorio |
 
 ---
 
@@ -209,7 +210,7 @@ Para comprobar que no rompí nada, corrí el simulador con el código nuevo y co
 
 ### Viernes 16 oct. El esquemático del 15 oct
 
-Electrónica actualizó el esquemático el 15 oct (`candidates schematic.pdf`; sigue diciendo V1.0, pero trae "Update at 2026-10-15"). [confirmar: cómo me enteré y si explicaron por qué el cambio]
+Electrónica actualizó el esquemático el 15 oct (`candidates schematic.pdf`; sigue diciendo V1.0, pero trae "Update at 2026-10-15"). Según electrónica, el cambio fue para que cada Arduino tuviera sus propios sensores.
 
 **1. Qué cambió.** Volví a sacar las conexiones del PDF y las comparé con las del 9 oct:
 
@@ -269,7 +270,7 @@ Revisé el código contra lo que armó mecánica: el instructivo de armado y el 
 
 **Lo que corregí en el código:** el robot no tiene sensor bajito; la pelota se detecta cuando entra al pocket y aprieta un micro switch. El código la buscaba con el sensor bajito, y sin él, en el simulador, la pista B bajaba de 240 a 130. Ahora en la sección 1 explora con la compuerta abierta, y cuando el switch se aprieta la cierra. Volvió a 240 de 240 en las cuatro posiciones de la pelota. También ajusté el largo del robot (24 cm) y los nombres: la garra es una compuerta con un servo SG90.
 
-**Lo que no se arregla en el código:** los dos sensores de color van casi en el centro del robot (1.2 cm adelante), y mi estrategia necesita que vayan unos 8 cm adelante para leer la casilla de enfrente sin pisarla. Con las medidas reales, la pista A bajó de 165 a 110 en el simulador. Además, el ultrasónico de enfrente queda a menos de 2 cm de la pared cuando el robot está centrado, el robot casi no cabe girando en una casilla, no hay sensores de piso para la sección 2 y la batería 3S puede ser mucho voltaje para los motores TT. Se lo paso a mecánica con los números. [confirmar: qué decidió mecánica]
+**Lo que no se arregla en el código:** los dos sensores de color van casi en el centro del robot (1.2 cm adelante), y mi estrategia necesita que vayan unos 8 cm adelante para leer la casilla de enfrente sin pisarla. Con las medidas reales, la pista A bajó de 165 a 110 en el simulador. Además, el ultrasónico de enfrente queda a menos de 2 cm de la pared cuando el robot está centrado, el robot casi no cabe girando en una casilla, no hay sensores de piso para la sección 2 y la batería 3S puede ser mucho voltaje para los motores TT. Se lo pasé a mecánica con los números. Ya no hay tiempo de cambiar la mecánica, así que decidimos dejarla como está y adaptar la estrategia en el código.
 
 **Evidencia:** `bitacora/simulador_2026-10-16.txt` y la sección "El robot de mecánica (16 oct)" del `README.md`.
 
@@ -279,11 +280,20 @@ Subí los dos programas a los Arduino. Al subir el de motores salió "not in syn
 
 En el monitor serial salió esto:
 
-- **Letras revueltas.** El monitor del Arduino IDE se comía las letras que venían después de los bytes de las órdenes (el 255 de inicio y el 0 del color blanco), y no se podía leer la calibración. Cambié las órdenes a puro texto: empiezan con `~` y los números van en hexadecimal (`~M7F7F`). La prueba del serial pasa sus 17 revisiones y detecta los dos errores que le metí a propósito.
-- **"No encuentro el sensor de color".** El Arduino de sensores no ve el TCS34725 por I2C. Agregué al modo de pruebas la letra `i`, que dice qué hay conectado al I2C. [confirmar: qué salió y cómo se arregló]
-- **Arrancó a calibrar la pista B,** o sea que D12 estaba en GND. [confirmar: por qué]
+- **Letras revueltas.** Primero pensé que eran los bytes de las órdenes (el 255 de inicio y el 0 del color blanco), y cambié las órdenes a puro texto: empiezan con `~` y los números van en hexadecimal (`~M7F7F`). Las letras revueltas siguieron saliendo con el cable entre los Arduino conectado, así que esa no era la causa. Leyendo el puerto directo desde la computadora, sin el monitor del IDE, los bytes llegaban limpios. La causa exacta no quedó clara; el cambio a texto se quedó porque así las órdenes se pueden leer. La prueba del serial pasa sus 17 revisiones y detecta los dos errores que le metí a propósito.
+- **"No encuentro el sensor de color".** El Arduino de sensores no ve el TCS34725 por I2C. Agregué al modo de pruebas la letra `i`, que dice qué hay conectado al I2C: salió "Nada en el I2C". Revisamos la alimentación y los cables y sigue sin aparecer; está pendiente.
+- **Arrancó a calibrar la pista B,** o sea que D12 estaba en GND. D12 es el selector de pista; quedó como un cable dupont: a GND corre la B y suelto corre la A.
 
 También hice un modo de pruebas (`robot/pruebas.cpp`) para medir el robot de verdad: los sensores, el avance, los giros, la compuerta y los LEDs, y cada prueba dice qué número cambiar.
+
+Lo que cambió en las conexiones esa noche:
+
+- **El servo pasó del D11 del Arduino de motores al D7 del de sensores.** La librería Servo usa el mismo temporizador que la velocidad de D9 y D10, y en el de motores esos dos son ENA y ENB: los motores habrían perdido el control de velocidad.
+- **Quité el cable de regreso** (D1 de motores al D0 de sensores). Solo servía para que el de motores contestara "aquí estoy", y mientras está puesto no se puede subir el programa ni entrar al modo de pruebas.
+- **No hay botón:** el botón de arranque es el mismo micro switch de la pelota (A3), apretado con el dedo.
+- **Diagnóstico de cables.** Agregué al modo de pruebas `u`, que dispara cada ultrasónico y busca en qué pin contesta el eco, y `w`, que dice qué pines están en GND. El de la izquierda funciona siempre; el de la derecha funcionó en una vuelta y en la otra no (falso contacto); el de enfrente no contesta en ningún pin. Además D11 aparece en GND sin que debiera tener nada. Sigue pendiente.
+
+**El código en GitHub.** Subí el código y esta bitácora al repositorio del equipo: https://github.com/Jhulyammm/candidates2026-programacion. El script `armar_entrega.py` (en la carpeta del proyecto) arma la carpeta de entrega y los zips de cada Arduino a partir de `codigo/`, y esa carpeta es la que se sube al repositorio cada vez que cambia algo.
 
 ---
 
@@ -322,5 +332,5 @@ También hice un modo de pruebas (`robot/pruebas.cpp`) para medir el robot de ve
 - Arduino IDE 2 (arduino-cli 1.5.1), con el core arduino:avr 1.8.8 para el Arduino Uno.
 - Librerías: Adafruit TCS34725 1.4.4, para leer el sensor de color, y Servo 1.3.0, para la garra. Son controladores de los sensores; la lógica y los movimientos son nuestros.
 - g++ 14.2 (MSYS2) para compilar el simulador.
-- Documentación consultada: hojas de datos del HC-SR04, el L298N, el TCS34725 y el LM2596; la referencia de Wire (I2C) y la de Serial de Arduino; y la de avr-libc para `PSTR` y `vfprintf_P`. [confirmar: agregar los links]
-- [confirmar: si usaste asistentes de IA, decláralo aquí. El reglamento no lo prohíbe, pero pide que no sustituya poder explicar, modificar y justificar el código y la bitácora.]
+- Documentación consultada: hojas de datos del HC-SR04, el L298N, el TCS34725 y el LM2596; la referencia de Wire (I2C) y la de Serial de Arduino; y la de avr-libc para `PSTR` y `vfprintf_P`. 
+- Usa de Claude Code para explicar y entender librerias asi como sensores y motores.
